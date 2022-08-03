@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <style>
+	tr p:hover:after {
+		position: absolute;
+		left: 15px;
+		top: 5px;
+		padding: 5px;
+		background-color: #0095ff;
+		border-radius: 5px;
+		color: #fff;
+		/*这里显示的内容为title属性对应的值*/
+		content: attr(title);
+		z-index: 2;
+		width: 120px;
+	}
+    </style>
+</head>
+<body>
+	<tr>
+		<p><a href="#" class="Hyperlink" title="超">超链接·1</a></p>
+	</tr>
+</body>
+</html>

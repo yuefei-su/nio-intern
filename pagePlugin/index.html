@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分页插件使用方法</title>
+  <link href="./common.css" rel="stylesheet">
+  <script src="./pagePlugin.js"></script>
+</head>
+
+<body>
+  <div class="page-plugin" id="pagePlugin"></div>
+  <script>
+    // 回调函数，页码改变时触发回调事件，用户可以在该回调内处理自己的业务逻辑
+    let pageChange = data => {
+      const { pageNum, pageSize } = data
+      console.log(`新的页码${pageNum}新的分页大小${pageSize}`)
+      // 处理你的分页逻辑（更新数据）
+    }
+
+    let homePagePlugin = new PagePlugin('pagePlugin', pageChange,10,100)
+
+    setTimeout(()=>{
+      // 第5页，每页10条数据，共113条数据
+      homePagePlugin.setPage(1,5,37)
+    })
+  </script>
+</body>
+
+</html>
+
+
+
+
