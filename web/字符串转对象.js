@@ -7,7 +7,8 @@ function main(str) {
         if (index === 0) {
             total[current] = null;
         } else {
-            let newValue = Object.assign({}, total)//深拷贝保存
+            // let newValue = Object.assign({}, total)//浅拷贝保存
+            let newValue = JSON.parse(JSON.stringify(total))//深拷贝保存
             total = {}//清空total
             total[current] = newValue;//重新赋值
         }
@@ -17,3 +18,13 @@ function main(str) {
 }
 
 console.log(main('a.b.c.d'));
+// 输出的是对象
+// {
+//     "a": {
+//         "b": {
+//             "c": {
+//                 "d": null
+//             }
+//         }
+//     }
+// }
