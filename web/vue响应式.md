@@ -55,7 +55,7 @@ PS：vue3是用proxy实现数据响应式的，直接动态添加新属性仍可
 
 vue3.0 实现数据双向绑定是通过Proxy  
 
-Proxy直接可以劫持整个对象，并返回一个新对象，我们可以只操作新的对象达到响应式目的
+Proxy 是创建对象的虚拟表示，并提供 set 、get 和 deleteProperty 等处理器，这些处理器可在访问或修改原始对象上的属性时进行拦截
 
 ```js
 function reactive(obj) {
@@ -64,16 +64,19 @@ function reactive(obj) {
     }
     // Proxy相当于在对象外层加拦截
     const observed = new Proxy(obj, {
+        //读取某个属性时调用        
         get(target, key, receiver) {
             const res = Reflect.get(target, key, receiver)
-            console.log(`获取${key}:${res}`)
+            console.log(`读取${key}:${res}`)
             return res
         },
+        //修改或者增加某个属性时调用
         set(target, key, value, receiver) {
             const res = Reflect.set(target, key, value, receiver)
-            console.log(`设置${key}:${value}`)
+            console.log(`修改或增加${key}:${value}`)
             return res
         },
+        //删除某个属性时调用
         deleteProperty(target, key) {
             const res = Reflect.deleteProperty(target, key)
             console.log(`删除${key}:${res}`)
@@ -83,6 +86,7 @@ function reactive(obj) {
     return observed
 }
 ```
+
 Proxy可以直接监听数组的变化（push、shift、splice）
 
 ```js
@@ -92,6 +96,7 @@ obj.psuh(4) // ok
 ```
 
 #### 使用proxy实现，双向数据绑定，相比2.0的Object.defineProperty()优势
-- 可以劫持整个对象，并返回一个新对象
+- Proxy 直接代理**整个对象**而非对象属性，这样只需做一层代理就可以监听同级结构下的所有属性变化，包括新增属性和删除属性。（不需要使用 `Vue.$set` 或 `Vue.$delete` 触发响应式）
+- 全方位的**监听数组**的变化，消除了Vue2 无效的边界情况
 - 有13种劫持操作,不限于apply、ownKeys、deleteProperty、has等等
 
