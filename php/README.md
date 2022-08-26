@@ -29,4 +29,15 @@
    8. 表尾error_exclude_coordinates信息自动计算
 
 
-
+- 函数
+  1. errorExclude()计算error_exclude_coordinates的坐标
+  2. formIntroduction()计算表头cover_name,cover_percent,all_bins,zero_bins,zero_bins_after_exclude,all_hit_count,exclude_bins信息
+  3. multiExclude()批量点击exclude，已经exclude的显示，没有的exclude的隐藏
+  4. removeExclude()批量移除exclude，范围内的全显示即全取消exclude
+  5. moreExclude()批量全为exclude，范围内的全隐藏即全为exclude
+  6. displayPaging()切换单页或者多页显示
+  7. showExclude()网页后缀再加"/0"，可以显示已经exclude的坐标
+  8. subTableForEach()分页遍历显示表格
+  9. excludeDatabase()向后端传excludeArray
+  10. homePagePlugin分页class插件，打开网页自调用一次
+  11. m_trace_status不显示表头表尾信息
